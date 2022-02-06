@@ -1,0 +1,40 @@
+import java.util.Scanner;
+
+/* Считаем сколько контейнеров и грузовиков будет необходимо для входного количества ящиков */
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scr = new Scanner(System.in);
+        final int contInTruckMax = 12;
+        final int boxInContMax = 27;
+        int inBox = scr.nextInt();
+        int truck = 1;
+        int container = 1;
+        int boxCount = 0;
+        if (inBox > 0)
+        {
+            System.out.println("Грузовик " + truck + ":");
+            System.out.println("Контейнер " + container + ":");
+            while (boxCount < inBox)
+            {
+                System.out.println("\tЯщик " + ++boxCount);
+                if ((container % contInTruckMax == 0) && (boxCount % boxInContMax == 0))
+                {
+                    System.out.println("Грузовик " + ++truck + ":");
+                }
+                if ((boxCount % boxInContMax == 0) && ((inBox - boxCount) > 0))
+
+                {
+                    System.out.println("Контейнер " + ++container + ":");
+                }
+            }
+            System.out.println("Необходимо:");
+            System.out.println("грузовиков - " + truck + " шт.");
+            System.out.println("контейнеров - " + container + " шт.");
+        }
+        else
+        {
+            System.out.println("Ящиков нет!");
+        }
+    }
+}
