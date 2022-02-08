@@ -1,0 +1,28 @@
+public class PhoneNumber
+{
+    public static void main(String[] args)
+    {
+        String phoneNumber = "+ 9 6-999 235";
+
+        String filtrNumber = phoneNumber.replaceAll("[^0-9]", "");
+        StringBuilder strBiled = new StringBuilder(filtrNumber);
+        if (strBiled.length() == 11)
+        {
+            int numFirst = strBiled.charAt(0);
+            if (numFirst == 56){
+                strBiled.setCharAt(0 , (char) 55);
+                System.out.println(strBiled);
+            } else if (numFirst == 55)
+            {
+                System.out.println(strBiled);
+            } else
+            {
+                System.out.println("Неверный формат номера");
+            }
+        }
+        else
+        {
+            System.out.println("Неверный формат номера. Мало цирф.");
+        }
+    }
+}
