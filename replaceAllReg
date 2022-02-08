@@ -1,0 +1,10 @@
+public class replaceAllReg
+{
+    public static void main(String[] args)
+    {
+      String text = "Привет <xdfsdfs   > на нашей <sasadfsdf> планете! <Ugsdfsdf>";
+      String placeholder = "человек";
+        System.out.println(text.replaceAll("(?=<)[^>]+[^<]",placeholder));
+
+    }
+}
