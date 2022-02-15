@@ -1,0 +1,36 @@
+import java.util.*;
+
+public class Loader
+{
+    public static void main(String[] args)
+    {
+        final int COUNT_PACIENT = 30;
+        final float MIN_TEMP_HUMAN = 32.0f;
+        final float MAX_TEMP_HUMAN = 40.0f;
+        final float MIN_TEMP_HEATHY = 36.2f;
+        final float MAX_TEMP_HEATHY = 36.9f;
+
+        float[] pacients = new float[COUNT_PACIENT];
+        float sumTemp = 0;
+        float avgTemp = 0;
+        int countHeathy = 0;
+
+        for (int i = 0; i < pacients.length; i++) {
+            float value = ((((float) Math.random() * (MAX_TEMP_HUMAN - MIN_TEMP_HUMAN)) + MIN_TEMP_HUMAN));
+            pacients[i] = value;
+        }
+
+        System.out.print("Температуры пациентов: ");
+        for (float out: pacients){
+            sumTemp += out;
+            System.out.printf(Locale.US, "%.1f ", out);
+            if (out >= MIN_TEMP_HEATHY && out <= MAX_TEMP_HEATHY){
+                countHeathy++;
+            }
+        }
+        avgTemp = sumTemp / pacients.length;
+        System.out.println();
+        System.out.printf(Locale.US,"Средняя температура : %.2f \n", avgTemp);
+        System.out.println("Количество здоровых: " + countHeathy);
+    }
+}
