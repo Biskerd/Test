@@ -1,0 +1,55 @@
+import java.util.*;
+
+
+public class phoneBook
+{
+    static TreeMap<String, String> phoneBook = new TreeMap<>();
+    public static void main(String[] args)
+    {
+
+        Scanner scanner = new Scanner(System.in);
+
+        while (scanner.hasNextLine()){
+            String inScanner = scanner.nextLine().trim();
+            if (inScanner.matches("[\\d]{11}")){
+                if (phoneBook.containsKey(inScanner)){
+                    System.out.println("Номер телефона : +" + inScanner + ". Владелец : " + phoneBook.get(inScanner));
+                } else {
+                    System.out.println("Новый номер, введите имя Владельца");
+                    //Scanner scr = new Scanner(System.in);
+                    String vladel = scanner.nextLine().trim();
+                    phoneBook.put(inScanner, vladel);
+                }
+            } else if (inScanner.matches("[А-Яа-я]+")){
+                if (phoneBook.containsValue(inScanner)){
+                    System.out.println("Номер телефона : +" + returnKey(inScanner) + ". Владелец : " + inScanner);
+                } else {
+                    System.out.println("Новый контакт, введите номер телефона");
+                    String newPhoneNum = scanner.nextLine().trim();
+                    phoneBook.put(newPhoneNum,inScanner);
+                }
+            } else if (inScanner.equalsIgnoreCase("LIST")){
+                printMap(phoneBook);
+            }
+        }
+    }
+
+
+
+    private static void printMap(Map<String, String> map){
+        for(String key: map.keySet()){
+            System.out.println("Номер телефона: " + key + " .Владелец: " + map.get(key));
+        }
+    }
+
+    public static String returnKey(String inName){
+        String key = "";
+        for (String k : phoneBook.keySet()){
+            if (phoneBook.get(k).equals(inName)){
+                key = k;
+                break;
+            }
+        }
+        return key;
+    }
+}
