@@ -1,0 +1,38 @@
+import java.util.*;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+
+public class Loader
+{
+    public static void main(String[] args)
+    {
+        Scanner scr = new Scanner(System.in);
+        TreeSet<String> emails = new TreeSet<>();
+
+        while (scr.hasNextLine()){
+            String[] inStr = scr.nextLine().split(" ");
+            if (inStr[0].equalsIgnoreCase("LIST")){
+                for (String outMail: emails){
+                    System.out.println(outMail);
+                }
+            } else if (inStr[0].equalsIgnoreCase("ADD")){
+                if (isValidEmailAddress(inStr[1])){
+                    emails.add(inStr[1]);
+                } else {
+                    System.out.println("Введён не корректный email");
+                }
+            }
+        }
+      }
+      
+    public static boolean isValidEmailAddress(String email) {
+        boolean result = true;
+        try {
+            InternetAddress emailAddr = new InternetAddress(email);
+            emailAddr.validate();
+        } catch (AddressException ex) {
+            result = false;
+        }
+        return result;
+    }
+}
