@@ -1,0 +1,109 @@
+import java.util.*;
+
+public class SearchNumber
+{
+    public static void main(String[] args) {
+
+        ArrayList<String> coolNumber = new ArrayList<>();
+
+
+        ArrayList<String> coolNumberWithoutReg = new ArrayList<>();
+
+        String numberPlate = "";
+        String numberWithoutReg = "";
+
+        char x, y, z;
+
+        ArrayList<Character> wordsIn = new ArrayList<>(){{
+           add('A');
+           add('В');
+           add('Е');
+           add('К');
+           add('М');
+           add('Н');
+           add('О');
+           add('Р');
+           add('С');
+           add('Т');
+           add('У');
+           add('Х');
+        }};
+
+        for (Character first: wordsIn){
+            x = first;
+            for (int n = 0; n < 10; n++) {
+                for (Character second: wordsIn){
+                    y = second;
+                    for (Character third: wordsIn){
+                        z = third;
+                        numberWithoutReg = String.format("%c%d%d%d%c%c",x, n, n, n, y, z);
+                        coolNumberWithoutReg.add(numberWithoutReg);
+                    }
+                }
+            }
+        }
+
+        for (String numbeWtih: coolNumberWithoutReg){
+            for (int i = 0; i <= 199 ; i++) {
+                if(i < 10){
+                    numberPlate = String.format("%s0%d", numbeWtih, i);
+                    coolNumber.add(numberPlate);
+                } else {
+                    numberPlate = String.format("%s%d", numbeWtih, i);
+                    coolNumber.add(numberPlate);
+                }
+            }
+        }
+        HashSet<String> set = new HashSet<>();
+        set.addAll(coolNumber);
+        TreeSet<String> treeSet = new TreeSet<>();
+        treeSet.addAll(coolNumber);
+
+        Scanner scanner = new Scanner(System.in);
+
+        while (scanner.hasNextLine()){
+            String checkNumber = scanner.nextLine().trim().toUpperCase(Locale.ROOT);
+
+            long start1 = System.currentTimeMillis();
+            if (coolNumber.contains(checkNumber)){
+                long duration1 = System.currentTimeMillis() - start1;
+                System.out.println("Поиск перебором: Номер найден, поиск занял " + duration1);
+            } else{
+                long duration1 = System.currentTimeMillis() - start1;
+                System.out.println("Поиск перебором: Номер на найден, поиск занял " + duration1);
+            }
+
+            long start2 = System.currentTimeMillis();
+            Collections.sort(coolNumber);
+            if (Collections.binarySearch(coolNumber, checkNumber) >= 0 ){
+                long duration2 = System.currentTimeMillis() - start2;
+                System.out.println("Поиск Бинарным: Номер найден, поиск занял " + duration2);
+            } else {
+                long duration2 = System.currentTimeMillis() - start2;
+                System.out.println("Поиск Бинарным: Номер не найден, поиск занял " + duration2);
+            }
+
+            long start3 = System.currentTimeMillis();
+            if(set.contains(checkNumber)){
+                long duration2 = System.currentTimeMillis() - start3;
+                System.out.println("Поиск HashSet: Номер найден, поиск занял " + duration2);
+            } else {
+                long duration2 = System.currentTimeMillis() - start3;
+                System.out.println("Поиск HashSet: Номер не найден, поиск занял " + duration2);
+            }
+
+            long start4 = System.currentTimeMillis();
+            if (treeSet.contains(checkNumber)){
+                long duration2 = System.currentTimeMillis() - start4;
+                System.out.println("Поиск HashSet: Номер найден, поиск занял " + duration2);
+            } else {
+                long duration2 = System.currentTimeMillis() - start4;
+                System.out.println("Поиск HashSet: Номер не найден, поиск занял " + duration2);
+            }
+
+
+        }
+        
+    }
+
+}
